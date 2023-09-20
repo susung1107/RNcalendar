@@ -15,7 +15,12 @@ import {
 import moment from 'moment';
 import { COLORS } from '../../utils';
 
-const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }: any) => {
+const CalendarHeader = ({
+  currentMonth,
+  prevMonth,
+  nextMonth,
+}: ICalendar.HeaderProps) => {
+  // formatting
   let year = moment(currentMonth).format('YYYY');
   let month = moment(currentMonth).format('MM');
 
