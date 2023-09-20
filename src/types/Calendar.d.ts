@@ -4,4 +4,8 @@ declare namespace ICalendar {
     prevMonth: () => void;
     nextMonth: () => void;
   }
+
+  interface DayProps {
+    currentMonth: Date;
+  }
 }

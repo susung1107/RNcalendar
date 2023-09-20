@@ -1,1 +1,1 @@
-export { COLORS } from './Constants';
+export { COLORS, WEEKS_KR, WEEKS_EN } from './Constants';

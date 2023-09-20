@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 
 // components
-import { CalendarHeader } from '../../components';
+import { CalendarHeader, CalendarWeek, CalendarDay } from '../../components';
+
+// styles
+import styles from './Calendar.style';
 
 import moment from 'moment';
 
 const Calendar = () => {
   // state
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  const [selectedDay, setSelectedDay] = useState<Date>(new Date());
+  // const [selectedDay, setSelectedDay] = useState<Date>(new Date());
 
   // func
   const prevMonth = () => {
@@ -21,12 +24,14 @@ const Calendar = () => {
   };
 
   return (
-    <View>
+    <View style={[styles.container]}>
       <CalendarHeader
         currentMonth={currentMonth}
         prevMonth={prevMonth}
         nextMonth={nextMonth}
       />
+      <CalendarWeek />
+      <CalendarDay currentMonth={currentMonth} />
     </View>
   );
 };
