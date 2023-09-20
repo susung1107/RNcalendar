@@ -12,7 +12,7 @@ import moment from 'moment';
 const Calendar = () => {
   // state
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-  // const [selectedDay, setSelectedDay] = useState<Date>(new Date());
+  const [selectedDay, setSelectedDay] = useState<Date>(new Date());
 
   // func
   const prevMonth = () => {
@@ -23,6 +23,11 @@ const Calendar = () => {
     setCurrentMonth(moment(currentMonth).add('1', 'M').toDate());
   };
 
+  const onSelect = () => {
+    // setSelectedDay();
+    console.log('save');
+  };
+
   return (
     <View style={[styles.container]}>
       <CalendarHeader
@@ -31,7 +36,11 @@ const Calendar = () => {
         nextMonth={nextMonth}
       />
       <CalendarWeek />
-      <CalendarDay currentMonth={currentMonth} />
+      <CalendarDay
+        currentMonth={currentMonth}
+        selectedDay={selectedDay}
+        onSelect={onSelect}
+      />
     </View>
   );
 };
