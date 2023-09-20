@@ -7,7 +7,14 @@ import styles from './CalendarDay.style';
 // moment
 import moment from 'moment';
 
-const CalendarDay = ({ currentMonth }: ICalendar.DayProps) => {
+const CalendarDay = ({
+  currentMonth,
+  selectedDay,
+  onSelect,
+}: ICalendar.DayProps) => {
+  // 선택된 날짜
+  const selected = moment(selectedDay).date();
+
   // 시작 날짜 설정
   const startOfMonth = moment(currentMonth).startOf('month');
 
@@ -21,6 +28,10 @@ const CalendarDay = ({ currentMonth }: ICalendar.DayProps) => {
   let currentDate = startOfMonth.clone();
 
   // func
+  const isSelected = (index: number): boolean => {
+    return selected === index;
+  };
+
   const renderCalerdar = () => {
     const calendar = [];
     let row = [];
@@ -40,9 +51,15 @@ const CalendarDay = ({ currentMonth }: ICalendar.DayProps) => {
 
     // 이번 달 days 출력
     for (let day = 1; day <= endOfMonth.date(); day++) {
+      let isActive = isSelected(day);
+
       row.push(
-        <TouchableOpacity style={[styles.day]}>
-          <Text style={[styles.dayText]}>{day}</Text>
+        <TouchableOpacity style={[styles.day]} onPress={onSelect}>
+          <View style={isActive && [styles.activeDay]}>
+            <Text style={isActive ? [styles.activeText] : [styles.dayText]}>
+              {day}
+            </Text>
+          </View>
         </TouchableOpacity>,
       );
 
@@ -57,8 +74,8 @@ const CalendarDay = ({ currentMonth }: ICalendar.DayProps) => {
     }
 
     // 달력에 포함 된 다음 달 day 출력
-    const endDay = endOfMonth.day(); // 4
-    // 5,6
+    const endDay = endOfMonth.day();
+
     for (let i = endDay + 1; i < 7; i++) {
       const day = moment(currentDate)
         .add(startDayOfWeek - i, 'days')
