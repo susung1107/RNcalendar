@@ -8,6 +8,12 @@ declare namespace ICalendar {
   interface DayProps {
     currentMonth: Date;
     selectedDay: Date;
-    onSelect: () => void;
+    onSelect: ({ year, month, day }: OnSelectProps) => void;
+  }
+
+  interface OnSelectProps {
+    year: string;
+    month: string;
+    day: number;
   }
 }
