@@ -23,9 +23,11 @@ const Calendar = () => {
     setCurrentMonth(moment(currentMonth).add('1', 'M').toDate());
   };
 
-  const onSelect = () => {
-    // setSelectedDay();
-    console.log('save');
+  const onSelect = ({ year, month, day }: ICalendar.OnSelectProps) => {
+    const dayToString = String(day).padStart(2, '0'); // day를 두 자리 숫자로 변환
+    const fullDate = `${year}-${month}-${dayToString}`;
+    const newDate = new Date(fullDate);
+    setSelectedDay(newDate);
   };
 
   return (
