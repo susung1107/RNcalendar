@@ -4,9 +4,6 @@ import { View } from 'react-native';
 // components
 import { CalendarHeader, CalendarWeek, CalendarDay } from '../../components';
 
-// styles
-import styles from './Calendar.style';
-
 import moment from 'moment';
 
 const Calendar = () => {
@@ -24,14 +21,14 @@ const Calendar = () => {
   };
 
   const onSelect = ({ year, month, day }: ICalendar.OnSelectProps) => {
-    const dayToString = String(day).padStart(2, '0'); // day를 두 자리 숫자로 변환
+    const dayToString = day.toString().padStart(2, '0');
     const fullDate = `${year}-${month}-${dayToString}`;
     const newDate = new Date(fullDate);
     setSelectedDay(newDate);
   };
 
   return (
-    <View style={[styles.container]}>
+    <View>
       <CalendarHeader
         currentMonth={currentMonth}
         prevMonth={prevMonth}
