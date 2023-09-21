@@ -15,27 +15,19 @@ const CalendarDay = ({
   // formatting
   let year = moment(currentMonth).format('YYYY');
   let month = moment(currentMonth).format('MM');
-  const selectedMonth = moment(selectedDay).format('MM');
+  let yearMonth = moment(currentMonth).format('YYYY-MM');
+  const selectYearMonth = moment(selectedDay).format('YYYY-MM');
 
-  // 선택된 날짜의 date
-  const selectedDate = moment(selectedDay).date();
+  const selectedDate = moment(selectedDay).date(); // 선택된 날짜의 date
+  const startOfMonth = moment(currentMonth).startOf('month'); // 시작 날짜 설정
+  const startDayOfWeek = startOfMonth.day(); // 달력 상 첫째 주의 첫 번째 날의 요일
+  const endOfMonth = moment(currentMonth).endOf('month'); // 월의 마지막 날짜 가져오기
 
-  // 시작 날짜 설정
-  const startOfMonth = moment(currentMonth).startOf('month');
-
-  // 달력 상 첫째 주의 첫 번째 날의 요일
-  const startDayOfWeek = startOfMonth.day();
-
-  // 월의 마지막 날짜 가져오기
-  const endOfMonth = moment(currentMonth).endOf('month');
-
-  // 현재 날짜를 시작 날짜로 설정
-  let currentDate = startOfMonth.clone();
+  let currentDate = startOfMonth.clone(); // 현재 날짜를 시작 날 짜로 설정
 
   // func
   const isSelected = (index: number): boolean => {
-    // 달력의 month === 선택된 날의 month and 선택된 날의 date === 달력의 date
-    return month === selectedMonth && selectedDate === index;
+    return yearMonth === selectYearMonth && selectedDate === index;
   };
 
   const renderCalerdar = () => {
@@ -84,7 +76,6 @@ const CalendarDay = ({
 
     // 달력에 포함 된 다음 달 day 출력
     const endDay = endOfMonth.day();
-
     for (let i = endDay; i < 6; i++) {
       const day = moment(currentDate)
         .add(i - endDay, 'days')
